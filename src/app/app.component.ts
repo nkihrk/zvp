@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     const options = {
       autoplay: true,
       controls: true,
-      sources: [{ src: 'assets/06 春香.mp4', type: 'video/mp4' }],
+      sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }],
     };
     this.zvp.init(options);
   }
