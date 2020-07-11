@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ZvpService } from 'zvp';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'zoomable-video-player';
+export class AppComponent implements OnInit {
+  constructor(private zvp: ZvpService) {}
+
+  ngOnInit() {
+    const options = {
+      autoplay: true,
+      controls: true,
+      sources: [{ src: 'assets/06 春香.mp4', type: 'video/mp4' }],
+    };
+    this.zvp.init(options);
+  }
 }

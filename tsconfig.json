@@ -15,6 +15,12 @@
     },
     {
       "path": "./e2e/tsconfig.json"
+    },
+    {
+      "path": "./projects/zvp/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/zvp/tsconfig.spec.json"
     }
 ]
 }
