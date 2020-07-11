@@ -9,14 +9,18 @@ import { DbService } from './db.service';
 export class ZvpService {
   constructor(private renderer: RendererService, private db: DbService) {}
 
+  //////////////////////////////////////////////////////////
+  //
+  // Public
+  //
+  //////////////////////////////////////////////////////////
+
   init($options: {
     autoplay: boolean;
     controls: boolean;
     sources: { src: string; type: string }[];
   }): void {
-    // Initialize DB
-    this.db.init();
-
+    this.db.renderer.video = document.createElement('video');
     this.db.renderer.player = videojs(
       this.db.renderer.video,
       $options,
@@ -24,6 +28,8 @@ export class ZvpService {
         console.log('onPlayerReady', this);
       }
     );
+    this.db.renderer.canvas.ui = document.createElement('canvas');
+    this.db.renderer.ctx.ui = this.db.renderer.canvas.ui.getContext('2d');
   }
 
   destroy(): void {
@@ -32,7 +38,13 @@ export class ZvpService {
     }
   }
 
-  _initRenderer($target: ElementRef<HTMLCanvasElement>): void {
+  //////////////////////////////////////////////////////////
+  //
+  // Private
+  //
+  //////////////////////////////////////////////////////////
+
+  _initMainRenderer($target: ElementRef<HTMLCanvasElement>): void {
     this.db.renderer.canvas.main = $target.nativeElement;
     this.db.renderer.ctx.main = this.db.renderer.canvas.main.getContext('2d');
   }

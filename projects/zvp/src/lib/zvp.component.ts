@@ -6,11 +6,18 @@ import {
   ElementRef,
 } from '@angular/core';
 import { ZvpService } from './services/zvp.service';
+import { PointerData } from './models/pointer-data.model';
 
 @Component({
   selector: 'zvp-component',
   template: `
-    <div #zvpWrapper id="zvp-wrapper" style="position: relative;">
+    <div
+      #zvpWrapper
+      id="zvp-wrapper"
+      style="position: relative;"
+      zvpEvent
+      (pointerData)="_onPointerEvents($event)"
+    >
       <canvas #renderer id="renderer"></canvas>
 
       <div id="overlay" style="position: absolute;">
@@ -51,17 +58,21 @@ export class ZvpComponent implements OnInit {
   constructor(private zvp: ZvpService) {}
 
   ngOnInit(): void {
-    this.zvp._initRenderer(this.renderer);
+    this.zvp._initMainRenderer(this.renderer);
 
-    this.render();
+    this._render();
   }
 
-  render(): void {
+  _render(): void {
     const r: FrameRequestCallback = () => {
       this.zvp._render();
 
       requestAnimationFrame(r);
     };
     requestAnimationFrame(r);
+  }
+
+  _onPointerEvents($e: PointerData): void {
+    console.log($e);
   }
 }
