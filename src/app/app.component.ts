@@ -4,7 +4,7 @@ import { ZvpService } from 'zvp';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   constructor(private zvp: ZvpService) {}
@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
     const options = {
       autoplay: true,
       controls: true,
-      sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }],
+      loop: true,
+      sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }]
     };
     this.zvp.init(options);
   }

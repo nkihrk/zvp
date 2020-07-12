@@ -2,18 +2,21 @@ import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 import { PointerData } from '../models/pointer-data.model';
 
 @Directive({
-  selector: '[zvpEvent]',
+  selector: '[zvpEvent]'
 })
 export class EventDirective {
   @Output() pointerData = new EventEmitter<PointerData>();
 
   // Wheel delta
   private delta = 0;
+  // Mouse button number
+  private btn = 0;
 
   // Flgs
   private wheelFlg = false;
   private downFlg = false;
   private moveFlg = false;
+  private dblClickFlg = false;
 
   constructor() {}
 
@@ -22,15 +25,18 @@ export class EventDirective {
       x: $clientX,
       y: $clientY,
       delta: this.delta,
+      btn: this.btn,
       wheelFlg: this.wheelFlg,
       downFlg: this.downFlg,
       moveFlg: this.moveFlg,
+      dblClickFlg: this.dblClickFlg
     });
   }
 
   _resetAllFlgs() {
     this.downFlg = false;
     this.moveFlg = false;
+    this.dblClickFlg = false;
   }
 
   // Pointerdown listener
@@ -41,7 +47,7 @@ export class EventDirective {
   }
 
   // Pointerup listener
-  @HostListener('pointerup', ['$event']) onPointerUp($e) {
+  @HostListener('document:pointerup', ['$event']) onPointerUp($e) {
     $e.preventDefault();
     $e.stopPropagation();
 
@@ -49,7 +55,7 @@ export class EventDirective {
   }
 
   // Pointermove listener
-  @HostListener('pointermove', ['$event']) onPointerMove($e) {
+  @HostListener('document:pointermove', ['$event']) onPointerMove($e) {
     $e.preventDefault();
     $e.stopPropagation();
 
@@ -64,14 +70,14 @@ export class EventDirective {
   }
 
   // Touchend listener
-  @HostListener('touchend', ['$event']) onTouchEnd($e) {
+  @HostListener('document:touchend', ['$event']) onTouchEnd($e) {
     // $e.preventDefault();
     $e.stopPropagation();
     this._onUp($e);
   }
 
   // Touchmove listener
-  @HostListener('touchmove', ['$event']) onTouchMove($e) {
+  @HostListener('document:touchmove', ['$event']) onTouchMove($e) {
     // $e.preventDefault();
     $e.stopPropagation();
     this._onMove($e);
@@ -85,7 +91,7 @@ export class EventDirective {
   }
 
   // Mouseup listener
-  @HostListener('mouseup', ['$event']) onMouseUp($e) {
+  @HostListener('document:mouseup', ['$event']) onMouseUp($e) {
     $e.preventDefault();
     $e.stopPropagation();
     this._onUp($e);
@@ -95,10 +101,27 @@ export class EventDirective {
   @HostListener('mouseleave', ['$event']) onMouseLeave($e) {}
 
   // Mousemove listener
-  @HostListener('mousemove', ['$event']) onMouseMove($e) {
+  @HostListener('document:mousemove', ['$event']) onMouseMove($e) {
     $e.preventDefault();
     $e.stopPropagation();
     this._onMove($e);
+  }
+
+  // Dblclick listener
+  @HostListener('dblclick', ['$event']) onDoubleClick($e) {
+    $e.preventDefault();
+    $e.stopPropagation();
+
+    const clientX = $e.clientX;
+    const clientY = $e.clientY;
+
+    // Initialize flags
+    this._resetAllFlgs();
+    this.dblClickFlg = true;
+    this._emitData(clientX, clientY);
+
+    // To prevent permanent zooming
+    this.dblClickFlg = false;
   }
 
   // Wheel listener
@@ -123,9 +146,11 @@ export class EventDirective {
     if ($e.type === 'touchstart') {
       clientX = $e.touches[0].clientX;
       clientY = $e.touches[0].clientY;
+      this.btn = 0;
     } else {
       clientX = $e.clientX;
       clientY = $e.clientY;
+      this.btn = $e.button;
     }
 
     // Initialize flags

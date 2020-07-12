@@ -1,23 +1,13 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
-import { ZvpService } from './services/zvp.service';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { ZvpService } from './services/core/zvp.service';
 import { PointerData } from './models/pointer-data.model';
+import { FlgEventService } from './services/core/flg-event.service';
+import { ProcService } from './services/core/proc.service';
 
 @Component({
   selector: 'zvp-component',
   template: `
-    <div
-      #zvpWrapper
-      id="zvp-wrapper"
-      style="position: relative;"
-      zvpEvent
-      (pointerData)="_onPointerEvents($event)"
-    >
+    <div #zvpWrapper id="zvp-wrapper" style="position: relative;" zvpEvent (pointerData)="_onPointerEvents($event)">
       <canvas #renderer id="renderer"></canvas>
 
       <div id="overlay" style="position: absolute;">
@@ -48,14 +38,12 @@ import { PointerData } from './models/pointer-data.model';
     </div>
   `,
   styleUrls: ['./_reset.scss', './zvp.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class ZvpComponent implements OnInit {
-  @ViewChild('renderer', { static: true }) renderer: ElementRef<
-    HTMLCanvasElement
-  >;
+  @ViewChild('renderer', { static: true }) renderer: ElementRef<HTMLCanvasElement>;
 
-  constructor(private zvp: ZvpService) {}
+  constructor(private zvp: ZvpService, private flgEvent: FlgEventService, private proc: ProcService) {}
 
   ngOnInit(): void {
     this.zvp._initMainRenderer(this.renderer);
@@ -73,6 +61,7 @@ export class ZvpComponent implements OnInit {
   }
 
   _onPointerEvents($e: PointerData): void {
-    console.log($e);
+    this.flgEvent.updateFlgs($e);
+    this.proc.update($e);
   }
 }
