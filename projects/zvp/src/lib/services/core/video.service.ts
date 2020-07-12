@@ -61,15 +61,16 @@ export class VideoService {
     const video: HTMLVideoElement = this.db.renderer.video;
     const w: number = video.videoWidth;
     const h: number = video.videoHeight;
-    this.db.renderer.canvas.main.width = w;
-    this.db.renderer.canvas.main.height = h;
+    const c: HTMLCanvasElement = this.db.renderer.canvas.videoBuffer;
+    c.width = w;
+    c.height = h;
 
     const fixedW: number = w * this.db.videoOffset.zoomRatio;
     const fixedH: number = h * this.db.videoOffset.zoomRatio;
     const fixedX: number = this.db.videoOffset.newOffsetX;
     const fixedY: number = this.db.videoOffset.newOffsetY;
 
-    const ctx: CanvasRenderingContext2D = this.db.renderer.ctx.main;
+    const ctx: CanvasRenderingContext2D = this.db.renderer.ctx.videoBuffer;
     ctx.save();
     ctx.translate(fixedX, fixedY);
     //ctx.scale(-1, 1);

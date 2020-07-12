@@ -43,10 +43,7 @@ export class CoordService {
     let offsetY: number = offsets.prevOffsetY;
 
     if (!this.db.flgs.wheelFlg) {
-      if (
-        ($event.btn === 0 && !this.db.states.isPreventSelect) ||
-        ($event.btn === 1 && !this.db.states.isPreventWholeTrans)
-      ) {
+      if ($event.btn === 1 && !this.db.states.isPreventWholeTrans) {
         offsetX += $newOffsetX;
         offsetY += $newOffsetY;
       }

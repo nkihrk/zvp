@@ -39,11 +39,9 @@ export class DbService {
   };
 
   public states = {
-    isPreventSelect: false,
     isPreventWheel: false,
     isPreventWholeTrans: false,
-    isNeededToUpdateHistory: false,
-    isChangedStates: false
+    isLoaded: false
   };
 
   public mouseOffset = {
@@ -75,10 +73,12 @@ export interface Renderer {
 
 export interface Canvas {
   main: HTMLCanvasElement;
-  ui: HTMLCanvasElement;
+  videoBuffer: HTMLCanvasElement;
+  uiBuffer: HTMLCanvasElement;
 }
 
 export interface Ctx {
   main: CanvasRenderingContext2D;
-  ui: CanvasRenderingContext2D;
+  videoBuffer: CanvasRenderingContext2D;
+  uiBuffer: CanvasRenderingContext2D;
 }
