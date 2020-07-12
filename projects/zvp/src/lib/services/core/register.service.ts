@@ -19,7 +19,6 @@ export class RegisterService {
 
     this.video.registerOnMouseDown();
 
-    // Wheel event - zooming-in/out
     if (flgs.wheelFlg) {
       this.video.registerOnNoMouseDown($event);
     }
@@ -42,7 +41,6 @@ export class RegisterService {
       if (reserved.name === '') {
       }
     } else if (flgs.middleDownMoveFlg) {
-      // Update canvas coordinates
       this.video.registerOnMouseMiddleMove($newOffsetX, $newOffsetY, $event);
     }
   }

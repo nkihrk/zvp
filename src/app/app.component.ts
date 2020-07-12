@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const options = {
       autoplay: true,
-      controls: true,
+      controls: false,
       loop: true,
       sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }]
     };

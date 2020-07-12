@@ -17,11 +17,19 @@ export class ZvpService {
 
   init($options: VideoJsPlayerOptions): void {
     this.db.renderer.video = document.createElement('video');
+    this.db.renderer.video.onloadedmetadata = () => {
+      this.db.videoOffset.newOffsetX = this.db.renderer.video.videoWidth / 2;
+      this.db.videoOffset.newOffsetY = this.db.renderer.video.videoHeight / 2;
+    };
     this.db.renderer.player = videojs(this.db.renderer.video, $options, function onPlayerReady() {
       console.log('onPlayerReady', this);
     });
     this.db.renderer.canvas.ui = document.createElement('canvas');
     this.db.renderer.ctx.ui = this.db.renderer.canvas.ui.getContext('2d');
+
+    //setInterval(() => {
+    //console.log(this.db.videoOffset.zoomRatio);
+    //}, 1000);
   }
 
   destroy(): void {
