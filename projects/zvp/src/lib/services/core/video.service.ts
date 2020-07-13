@@ -31,8 +31,9 @@ export class VideoService {
 
   _restrictArea(): void {
     const video: HTMLVideoElement = this.db.renderer.video;
-    const w: number = video.videoWidth;
-    const h: number = video.videoHeight;
+    const ratio: number = video.videoHeight / video.videoWidth;
+    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const h: number = w * ratio;
 
     const fixedW: number = w * this.db.videoOffset.zoomRatio;
     const fixedH: number = h * this.db.videoOffset.zoomRatio;
@@ -59,8 +60,9 @@ export class VideoService {
 
   render(): void {
     const video: HTMLVideoElement = this.db.renderer.video;
-    const w: number = video.videoWidth;
-    const h: number = video.videoHeight;
+    const ratio: number = this.db.renderer.video.videoHeight / this.db.renderer.video.videoWidth;
+    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const h: number = w * ratio;
     const c: HTMLCanvasElement = this.db.renderer.canvas.videoBuffer;
     c.width = w;
     c.height = h;

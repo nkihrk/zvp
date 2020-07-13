@@ -41,7 +41,8 @@ export class DbService {
   public states = {
     isPreventWheel: false,
     isPreventWholeTrans: false,
-    isLoaded: false
+    isLoaded: false,
+    isInitialized: false
   };
 
   public mouseOffset = {
@@ -65,6 +66,7 @@ export class DbService {
 }
 
 export interface Renderer {
+  zvpWrapper: HTMLDivElement;
   video: HTMLVideoElement;
   player: videojs.Player;
   canvas: Canvas;

@@ -9,8 +9,9 @@ export class UiService {
 
   render(): void {
     const video: HTMLVideoElement = this.db.renderer.video;
-    const w: number = video.videoWidth;
-    const h: number = video.videoHeight;
+    const ratio: number = video.videoHeight / video.videoWidth;
+    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const h: number = w * ratio;
     const c: HTMLCanvasElement = this.db.renderer.canvas.uiBuffer;
     c.width = w;
     c.height = h;

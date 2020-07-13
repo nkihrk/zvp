@@ -11,8 +11,8 @@ export class ProcService {
 
   update($event: PointerData): void {
     // Update mouseOffset
-    this.db.mouseOffset.x = $event.x - this.db.renderer.canvas.main.getBoundingClientRect().left;
-    this.db.mouseOffset.y = $event.y - this.db.renderer.canvas.main.getBoundingClientRect().top;
+    this.db.mouseOffset.x = $event.x - this.db.renderer.zvpWrapper.getBoundingClientRect().left;
+    this.db.mouseOffset.y = $event.y - this.db.renderer.zvpWrapper.getBoundingClientRect().top;
     this.db.mouseOffset.rawX = $event.x;
     this.db.mouseOffset.rawY = $event.y;
 

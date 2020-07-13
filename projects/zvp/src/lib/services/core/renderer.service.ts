@@ -14,15 +14,16 @@ export class RendererService {
     this.ui.render();
 
     const video: HTMLVideoElement = this.db.renderer.video;
-    const w: number = video.videoWidth;
-    const h: number = video.videoHeight;
+    const ratio: number = video.videoHeight / video.videoWidth;
+    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const h: number = w * ratio;
     const c: HTMLCanvasElement = this.db.renderer.canvas.main;
     c.width = w;
     c.height = h;
 
     const ctx: CanvasRenderingContext2D = this.db.renderer.ctx.main;
     if (this.db.states.isLoaded) {
-      ctx.drawImage(this.db.renderer.canvas.videoBuffer, 0, 0);
+      ctx.drawImage(this.db.renderer.canvas.videoBuffer, 0, 0, w, h);
       ctx.drawImage(this.db.renderer.canvas.uiBuffer, 0, 0);
     }
   }

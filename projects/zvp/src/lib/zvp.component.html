@@ -1,0 +1,51 @@
+<div #zvpWrapper id="zvp-wrapper" zvpEvent (pointerData)="_onPointerEvents($event)">
+  <canvas #renderer id="renderer"></canvas>
+
+  <div id="overlay">
+    <div id="top">
+      <div id="video-title"><h2 style="color: white;">テスト</h2></div>
+    </div>
+
+    <div id="bottom">
+      <div id="test" class="flex-row-prefix">
+        <div id="play-bar">
+          <div id="play-bar-total" class="bar-prefix"></div>
+          <div id="play-bar-cached" class="bar-prefix"></div>
+          <div id="play-bar-hover" class="bar-prefix"></div>
+          <div id="play-bar-current" class="bar-prefix"></div>
+        </div>
+      </div>
+
+      <div id="zvp-tools">
+        <div id="left" class="flex-row-prefix">
+          <div id="play">
+            <fa-icon [icon]="faPlay" size="sm" class="icon-prefix"></fa-icon>
+          </div>
+          <div id="sound" class="flex-row-prefix">
+            <div id="mute"></div>
+            <div id="volume">
+              <fa-icon [icon]="faVolumeUp" size="sm" class="icon-prefix"></fa-icon>
+            </div>
+            <div id="volume-bar">
+              <div id="volume-bar-total" class="bar-prefix"></div>
+              <div id="volume-bar-current" class="bar-prefix"></div>
+            </div>
+          </div>
+          <div id="play-time">
+            9:58 / 50:16
+          </div>
+        </div>
+
+        <div id="right" class="flex-row-prefix">
+          <div id="reset"></div>
+          <div id="pip">
+            <fa-icon [icon]="faWindowRestore" size="sm" class="icon-prefix"></fa-icon>
+          </div>
+          <div id="fullscreen">
+            <fa-icon [icon]="faExpand" size="sm" class="icon-prefix"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ZvpComponent } from './zvp.component';
 import { EventDirective } from './directives/event.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [ZvpComponent, EventDirective],
-  imports: [],
-  exports: [ZvpComponent],
+  imports: [FontAwesomeModule],
+  exports: [ZvpComponent]
 })
 export class ZvpModule {}

@@ -18,8 +18,12 @@ export class ZvpService {
   init($options: VideoJsPlayerOptions): void {
     this.db.renderer.video = document.createElement('video');
     this.db.renderer.video.onloadedmetadata = () => {
-      this.db.videoOffset.newOffsetX = this.db.renderer.video.videoWidth / 2;
-      this.db.videoOffset.newOffsetY = this.db.renderer.video.videoHeight / 2;
+      const ratio: number = this.db.renderer.video.videoHeight / this.db.renderer.video.videoWidth;
+      const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+      const h: number = w * ratio;
+
+      this.db.videoOffset.newOffsetX = w / 2;
+      this.db.videoOffset.newOffsetY = h / 2;
       this.db.states.isLoaded = true;
     };
     this.db.renderer.player = videojs(this.db.renderer.video, $options, function onPlayerReady() {
@@ -31,6 +35,8 @@ export class ZvpService {
 
     this.db.renderer.ctx.videoBuffer = this.db.renderer.canvas.videoBuffer.getContext('2d');
     this.db.renderer.ctx.uiBuffer = this.db.renderer.canvas.uiBuffer.getContext('2d');
+
+    this.db.states.isInitialized = true;
 
     //setInterval(() => {
     //console.log(this.db.videoOffset.zoomRatio);
@@ -49,9 +55,15 @@ export class ZvpService {
   //
   //////////////////////////////////////////////////////////
 
-  _initMainRenderer($target: ElementRef<HTMLCanvasElement>): void {
-    this.db.renderer.canvas.main = $target.nativeElement;
+  _init($zvpWrapper: ElementRef<HTMLDivElement>, $renderer: ElementRef<HTMLCanvasElement>): void {
+    this.db.renderer.zvpWrapper = $zvpWrapper.nativeElement;
+    this.db.renderer.canvas.main = $renderer.nativeElement;
     this.db.renderer.ctx.main = this.db.renderer.canvas.main.getContext('2d');
+
+    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const h: number = this.db.renderer.zvpWrapper.getBoundingClientRect().height;
+    this.db.renderer.player.setAttribute('width', `${w}px`);
+    this.db.renderer.player.setAttribute('height', `${h}px`);
   }
 
   _render(): void {
