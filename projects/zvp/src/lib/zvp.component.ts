@@ -13,6 +13,7 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
+import { faCompress } from '@fortawesome/free-solid-svg-icons';
 // - fas
 import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
 
@@ -32,13 +33,19 @@ export class ZvpComponent implements OnInit {
   faExpand = faExpand;
   faWindowRestore = faWindowRestore;
   faRedo = faRedo;
+  faCompress = faCompress;
 
   videoName = '';
+  bufferedPercent = '0%';
+  hoverPercent = '0%';
+  currentPlaybackTimePercent = '0%';
+  currentVolume = '%';
   currentPlaybackTime = '--:--';
   totalPlaybackTime = '--:--';
 
   togglePlayFlg = true;
   toggleVolumeFlg = true;
+  toggleFullscreenFlg = true;
 
   constructor(
     private db: DbService,
@@ -82,6 +89,10 @@ export class ZvpComponent implements OnInit {
 
   _setInfo(): void {
     this.videoName = this.info.getVideoName;
+    this.bufferedPercent = this.info.getBufferedPercent;
+    this.hoverPercent = this.info.getHoverPercent;
+    this.currentPlaybackTimePercent = this.info.getCurrentPlaybackTimePercent;
+    this.currentVolume = this.info.getCurrentVolume;
     this.currentPlaybackTime = this.info.getCurrentPlaybackTime;
     this.totalPlaybackTime = this.info.getTotalPlaybackTime;
   }
@@ -109,5 +120,13 @@ export class ZvpComponent implements OnInit {
 
   _reset(): void {
     this.func.reset();
+  }
+
+  _toggleFullscreen(): void {
+    this.toggleFullscreenFlg = !this.toggleFullscreenFlg;
+
+    if (this.toggleFullscreenFlg) {
+    } else {
+    }
   }
 }

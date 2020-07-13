@@ -11,6 +11,31 @@ export class InfoService {
     return this.db.renderer.player.currentSrc();
   }
 
+  get getBufferedPercent(): string {
+    return this.db.renderer.player.bufferedPercent() * 100 + '%';
+  }
+
+  get getHoverPercent(): string {
+    const total: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const main: number = total * 0.98;
+    const piece: number = total * 0.02;
+    const current: number = this.db.mouseOffset.x - piece / 2;
+    return (current / main) * 100 + '%';
+  }
+
+  get getCurrentPlaybackTimePercent(): string {
+    const t: number = this.db.renderer.player.currentTime();
+    const tTotal: number = this.db.renderer.player.duration();
+
+    return (t / tTotal) * 100 + '%';
+  }
+
+  get getCurrentVolume(): string {
+    const v: number = this.db.renderer.player.volume();
+
+    return v * 100 + '%';
+  }
+
   get getCurrentPlaybackTime(): string {
     const t: number = this.db.renderer.player.currentTime();
     const minutes: number = Math.floor(t / 60);
