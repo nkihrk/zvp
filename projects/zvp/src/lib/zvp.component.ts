@@ -4,6 +4,7 @@ import { ZvpService } from './services/core/zvp.service';
 import { PointerData } from './models/pointer-data.model';
 import { FlgEventService } from './services/core/flg-event.service';
 import { ProcService } from './services/core/proc.service';
+import { InfoService } from './services/core/info.service';
 // Fontawesome
 // - far
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -29,11 +30,15 @@ export class ZvpComponent implements OnInit {
   faExpand = faExpand;
   faWindowRestore = faWindowRestore;
 
+  currentPlaybackTime = '--:--';
+  totalPlaybackTime = '--:--';
+
   constructor(
     private db: DbService,
     private zvp: ZvpService,
     private flgEvent: FlgEventService,
-    private proc: ProcService
+    private proc: ProcService,
+    private info: InfoService
   ) {}
 
   ngOnInit(): void {
@@ -42,19 +47,27 @@ export class ZvpComponent implements OnInit {
     this._render();
   }
 
+  _onPointerEvents($e: PointerData): void {
+    if (this.db.states.isInitialized) {
+      this.flgEvent.updateFlgs($e);
+      this.proc.update($e);
+    }
+  }
+
   _render(): void {
     const r: FrameRequestCallback = () => {
-      if (this.db.states.isInitialized) this.zvp._render();
+      if (this.db.states.isInitialized) {
+        this.zvp._render();
+        this._setInfo();
+      }
 
       requestAnimationFrame(r);
     };
     requestAnimationFrame(r);
   }
 
-  _onPointerEvents($e: PointerData): void {
-    if (this.db.states.isInitialized) {
-      this.flgEvent.updateFlgs($e);
-      this.proc.update($e);
-    }
+  _setInfo(): void {
+    this.currentPlaybackTime = this.info.getCurrentPlaybackTime;
+    this.totalPlaybackTime = this.info.getTotalPlaybackTime;
   }
 }
