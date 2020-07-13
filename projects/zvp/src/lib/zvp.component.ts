@@ -5,12 +5,14 @@ import { PointerData } from './models/pointer-data.model';
 import { FlgEventService } from './services/core/flg-event.service';
 import { ProcService } from './services/core/proc.service';
 import { InfoService } from './services/core/info.service';
+import { FuncService } from './services/core/func.service';
 // Fontawesome
 // - far
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faRedo } from '@fortawesome/free-solid-svg-icons';
 // - fas
 import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
 
@@ -29,16 +31,22 @@ export class ZvpComponent implements OnInit {
   faVolumeMute = faVolumeMute;
   faExpand = faExpand;
   faWindowRestore = faWindowRestore;
+  faRedo = faRedo;
 
+  videoName = '';
   currentPlaybackTime = '--:--';
   totalPlaybackTime = '--:--';
+
+  togglePlayFlg = true;
+  toggleVolumeFlg = true;
 
   constructor(
     private db: DbService,
     private zvp: ZvpService,
     private flgEvent: FlgEventService,
     private proc: ProcService,
-    private info: InfoService
+    private info: InfoService,
+    private func: FuncService
   ) {}
 
   ngOnInit(): void {
@@ -66,8 +74,40 @@ export class ZvpComponent implements OnInit {
     requestAnimationFrame(r);
   }
 
+  //////////////////////////////////////////////////////////
+  //
+  // Setting info
+  //
+  //////////////////////////////////////////////////////////
+
   _setInfo(): void {
+    this.videoName = this.info.getVideoName;
     this.currentPlaybackTime = this.info.getCurrentPlaybackTime;
     this.totalPlaybackTime = this.info.getTotalPlaybackTime;
+  }
+
+  //////////////////////////////////////////////////////////
+  //
+  // Functions
+  //
+  //////////////////////////////////////////////////////////
+
+  _togglePlay(): void {
+    this.togglePlayFlg = !this.togglePlayFlg;
+
+    if (this.togglePlayFlg) {
+      this.func.play();
+    } else {
+      this.func.pause();
+    }
+  }
+
+  _toggleVolume(): void {
+    this.toggleVolumeFlg = !this.toggleVolumeFlg;
+    this.func.mute();
+  }
+
+  _reset(): void {
+    this.func.reset();
   }
 }

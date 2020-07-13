@@ -7,6 +7,10 @@ import { DbService } from './db.service';
 export class InfoService {
   constructor(private db: DbService) {}
 
+  get getVideoName(): string {
+    return this.db.renderer.player.currentSrc();
+  }
+
   get getCurrentPlaybackTime(): string {
     const t: number = this.db.renderer.player.currentTime();
     const minutes: number = Math.floor(t / 60);

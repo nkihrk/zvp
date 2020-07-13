@@ -3,7 +3,9 @@
 
   <div id="overlay">
     <div id="top">
-      <div id="video-title"><h2 style="color: white;">テスト</h2></div>
+      <div id="video-title">
+        <h2 style="color: white;">{{ videoName }}</h2>
+      </div>
     </div>
 
     <div id="bottom">
@@ -18,13 +20,29 @@
 
       <div id="zvp-tools">
         <div id="left" class="flex-row-prefix">
-          <div id="play">
-            <fa-icon [icon]="faPlay" size="sm" class="icon-prefix"></fa-icon>
+          <div id="play" (click)="_togglePlay()">
+            <div id="resume" *ngIf="togglePlayFlg">
+              <div class="resume-prefix"></div>
+              <div class="resume-prefix"></div>
+            </div>
+            <fa-icon [icon]="faPlay" size="sm" class="icon-prefix" *ngIf="!togglePlayFlg"></fa-icon>
           </div>
           <div id="sound" class="flex-row-prefix">
-            <div id="mute"></div>
-            <div id="volume">
-              <fa-icon [icon]="faVolumeUp" size="sm" class="icon-prefix"></fa-icon>
+            <div id="volume" (click)="_toggleVolume()">
+              <fa-icon
+                [icon]="faVolumeUp"
+                [fixedWidth]="true"
+                size="sm"
+                class="icon-prefix"
+                *ngIf="toggleVolumeFlg"
+              ></fa-icon>
+              <fa-icon
+                [icon]="faVolumeMute"
+                [fixedWidth]="true"
+                size="sm"
+                class="icon-prefix"
+                *ngIf="!toggleVolumeFlg"
+              ></fa-icon>
             </div>
             <div id="volume-bar">
               <div id="volume-bar-total" class="bar-prefix"></div>
@@ -35,12 +53,14 @@
         </div>
 
         <div id="right" class="flex-row-prefix">
-          <div id="reset"></div>
+          <div id="reset" (click)="_reset()">
+            <fa-icon [icon]="faRedo" [fixedWidth]="true" size="sm" class="icon-prefix"></fa-icon>
+          </div>
           <div id="pip">
-            <fa-icon [icon]="faWindowRestore" size="sm" class="icon-prefix"></fa-icon>
+            <fa-icon [icon]="faWindowRestore" [fixedWidth]="true" size="sm" class="icon-prefix"></fa-icon>
           </div>
           <div id="fullscreen">
-            <fa-icon [icon]="faExpand" size="sm" class="icon-prefix"></fa-icon>
+            <fa-icon [icon]="faExpand" [fixedWidth]="true" size="sm" class="icon-prefix"></fa-icon>
           </div>
         </div>
       </div>

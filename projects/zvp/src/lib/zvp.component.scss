@@ -2,6 +2,7 @@
 Variables
 —————————————————————————————————————————————————————————*/
 
+$global-font-size: 14;
 $transition: 0.1s ease-in-out;
 $bar-thickness: 2;
 $volume-bar-width: 50;
@@ -24,13 +25,18 @@ Layouts
     height: 100%;
     margin: 0 1%;
     color: white;
+    font-size: 14px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     transition: opacity $transition;
-    opacity: 0;
+    opacity: 1;
+
+    /*———————————————————————————————————————————————————————
+    Show ui
+    —————————————————————————————————————————————————————————*/
 
     &:hover {
       opacity: 1;
@@ -38,6 +44,10 @@ Layouts
 
     #top {
       width: 100%;
+
+      #video-title {
+        padding: 10px 0;
+      }
     }
 
     #bottom {
@@ -102,7 +112,7 @@ Layouts
       }
 
       #zvp-tools {
-        font-size: 1.2rem;
+        font-size: #{$global-font-size * 1.2}px;
         padding: 6px 0;
 
         display: flex;
@@ -113,6 +123,25 @@ Layouts
           width: 100%;
           display: flex;
           flex-direction: row;
+
+          #play {
+            #resume {
+              width: 12.85px;
+              height: 14.69px;
+              margin: 0 10px;
+
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: stretch;
+
+              .resume-prefix {
+                width: 4px;
+                height: 100%;
+                background-color: white;
+              }
+            }
+          }
 
           #sound {
             #volume-bar {
@@ -146,7 +175,7 @@ Layouts
           }
 
           #playback-time {
-            font-size: 0.8rem;
+            font-size: #{$global-font-size * 0.8}px;
             line-height: 20px;
             vertical-align: middle;
             padding: 0 10px;
@@ -166,6 +195,7 @@ Layouts
 .icon-prefix {
   color: white;
   padding: 0 10px;
+  transform: scale(1.5, 1);
 }
 
 .bar-prefix {
