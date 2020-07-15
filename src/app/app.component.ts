@@ -11,9 +11,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const options = {
-      autoplay: true,
+      autoplay: false,
       controls: false,
-      loop: true,
+      loop: false,
       sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }]
     };
     this.zvp.init(options);

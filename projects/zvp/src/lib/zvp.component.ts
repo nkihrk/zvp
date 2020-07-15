@@ -39,12 +39,13 @@ export class ZvpComponent implements OnInit {
   bufferedPercent = '0%';
   hoverPercent = '0%';
   currentPlaybackTimePercent = '0%';
-  currentVolume = '%';
+  currentVolume = '0%';
   currentPlaybackTime = '--:--';
   totalPlaybackTime = '--:--';
 
-  togglePlayFlg = true;
+  togglePlayFlg = false;
   toggleVolumeFlg = true;
+  togglePipFlg = false;
   toggleFullscreenFlg = true;
 
   constructor(
@@ -73,6 +74,8 @@ export class ZvpComponent implements OnInit {
     const r: FrameRequestCallback = () => {
       if (this.db.states.isInitialized) {
         this.zvp._render();
+
+        this._detectVideoStates();
         this._setInfo();
       }
 
@@ -99,14 +102,24 @@ export class ZvpComponent implements OnInit {
 
   //////////////////////////////////////////////////////////
   //
+  // Detect video states
+  //
+  //////////////////////////////////////////////////////////
+
+  _detectVideoStates(): void {
+    this.togglePlayFlg = !this.db.renderer.player.paused();
+    this.toggleVolumeFlg = !this.db.renderer.player.muted();
+    this.toggleFullscreenFlg = !this.db.renderer.player.isFullscreen();
+  }
+
+  //////////////////////////////////////////////////////////
+  //
   // Functions
   //
   //////////////////////////////////////////////////////////
 
   _togglePlay(): void {
-    this.togglePlayFlg = !this.togglePlayFlg;
-
-    if (this.togglePlayFlg) {
+    if (!this.togglePlayFlg) {
       this.func.play();
     } else {
       this.func.pause();
@@ -114,7 +127,6 @@ export class ZvpComponent implements OnInit {
   }
 
   _toggleVolume(): void {
-    this.toggleVolumeFlg = !this.toggleVolumeFlg;
     this.func.mute();
   }
 
@@ -122,11 +134,23 @@ export class ZvpComponent implements OnInit {
     this.func.reset();
   }
 
-  _toggleFullscreen(): void {
-    this.toggleFullscreenFlg = !this.toggleFullscreenFlg;
+  async _togglePip(): Promise<any> {
+    this.togglePipFlg = !this.togglePipFlg;
 
-    if (this.toggleFullscreenFlg) {
+    if (this.togglePipFlg) {
+      const video: any = this.db.renderer.video;
+      await video.requestPictureInPicture();
     } else {
+      const d: any = document;
+      await d.exitPictureInPicture();
+    }
+  }
+
+  _toggleFullscreen(): void {
+    if (this.toggleFullscreenFlg) {
+      this.db.renderer.player.isFullscreen(true);
+    } else {
+      this.db.renderer.player.isFullscreen(false);
     }
   }
 }

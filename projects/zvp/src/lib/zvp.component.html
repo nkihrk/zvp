@@ -1,5 +1,5 @@
 <div #zvpWrapper id="zvp-wrapper" zvpEvent (pointerData)="_onPointerEvents($event)">
-  <canvas #renderer id="renderer"></canvas>
+  <canvas #renderer id="renderer" (click)="_togglePlay()"></canvas>
 
   <div id="overlay">
     <div id="top">
@@ -7,6 +7,8 @@
         <h2 style="color: white;">{{ videoName }}</h2>
       </div>
     </div>
+
+    <div id="middle" (click)="_togglePlay()"></div>
 
     <div id="bottom">
       <div id="test" class="flex-row-prefix">
@@ -62,7 +64,7 @@
           <div id="reset" (click)="_reset()">
             <fa-icon [icon]="faRedo" [fixedWidth]="true" size="sm" class="icon-prefix"></fa-icon>
           </div>
-          <div id="pip">
+          <div id="pip" (click)="_togglePip()">
             <fa-icon [icon]="faWindowRestore" [fixedWidth]="true" size="sm" class="icon-prefix"></fa-icon>
           </div>
           <div id="fullscreen" (click)="_toggleFullscreen()">
