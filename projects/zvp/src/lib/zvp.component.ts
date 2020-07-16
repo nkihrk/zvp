@@ -36,6 +36,7 @@ export class ZvpComponent implements OnInit {
   faCompress = faCompress;
 
   isPipAvailable = false;
+  isFullscreenAvailable = false;
 
   videoName = '';
   bufferedPercent = '0%';
@@ -48,7 +49,7 @@ export class ZvpComponent implements OnInit {
   togglePlayFlg = false;
   toggleVolumeFlg = true;
   togglePipFlg = false;
-  toggleFullscreenFlg = true;
+  toggleFullscreenFlg = false;
 
   constructor(
     private db: DbService,
@@ -112,7 +113,7 @@ export class ZvpComponent implements OnInit {
   _detectVideoStates(): void {
     this.togglePlayFlg = !this.db.renderer.player.paused();
     this.toggleVolumeFlg = !this.db.renderer.player.muted();
-    this.toggleFullscreenFlg = !this.db.renderer.player.isFullscreen();
+    this.toggleFullscreenFlg = !document.fullscreenElement;
   }
 
   //////////////////////////////////////////////////////////
@@ -123,6 +124,7 @@ export class ZvpComponent implements OnInit {
 
   _detectBrowserStates(): void {
     this.isPipAvailable = this.db.states.isPipAvailable;
+    this.isFullscreenAvailable = this.db.states.isFullscreenAvailable;
   }
 
   //////////////////////////////////////////////////////////
@@ -161,10 +163,14 @@ export class ZvpComponent implements OnInit {
   }
 
   _toggleFullscreen(): void {
-    if (this.toggleFullscreenFlg) {
-      this.db.renderer.player.isFullscreen(true);
-    } else {
-      this.db.renderer.player.isFullscreen(false);
+    if (!document.fullscreenElement) {
+      this.db.renderer.zvpWrapper.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
     }
+
+    this.db.renderer.zvpWrapper.onfullscreenchange = () => {
+      this.func.reset();
+    };
   }
 }

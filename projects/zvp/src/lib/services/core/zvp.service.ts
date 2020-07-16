@@ -39,6 +39,7 @@ export class ZvpService {
     // Set states
     this.db.states.isInitialized = true;
     this.db.states.isPipAvailable = 'pictureInPictureEnabled' in document;
+    this.db.states.isFullscreenAvailable = document.fullscreenEnabled;
 
     //setInterval(() => {
     //console.log(this.db.videoOffset.zoomRatio);

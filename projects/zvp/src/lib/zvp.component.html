@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div id="middle" (click)="_togglePlay()"></div>
+    <div id="middle" (click)="_togglePlay()" (dblclick)="_toggleFullscreen()"></div>
 
     <div id="bottom">
       <div id="test" class="flex-row-prefix">
@@ -67,7 +67,7 @@
           <div id="pip" (click)="_togglePip()" *ngIf="isPipAvailable">
             <fa-icon [icon]="faWindowRestore" [fixedWidth]="true" size="sm" class="icon-prefix"></fa-icon>
           </div>
-          <div id="fullscreen" (click)="_toggleFullscreen()">
+          <div id="fullscreen" (click)="_toggleFullscreen()" *ngIf="isFullscreenAvailable">
             <fa-icon
               [icon]="faExpand"
               [fixedWidth]="true"
