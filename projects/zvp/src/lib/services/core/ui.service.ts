@@ -16,8 +16,6 @@ export class UiService {
     c.width = w;
     c.height = h;
 
-    console.log(this.db.flgs.middleDownMoveFlg);
-
     if (this.db.flgs.middleDownMoveFlg) {
       const ctx: CanvasRenderingContext2D = this.db.renderer.ctx.uiBuffer;
       ctx.save();

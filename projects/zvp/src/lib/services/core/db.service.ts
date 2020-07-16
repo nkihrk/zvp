@@ -56,6 +56,8 @@ export class DbService {
     prevY: -Infinity
   };
 
+  public volume = 1;
+
   public reservedBy = {
     name: '',
     type: '',
@@ -69,6 +71,7 @@ export class DbService {
 
 export interface Renderer {
   zvpWrapper: HTMLDivElement;
+  volume: HTMLDivElement;
   video: HTMLVideoElement;
   player: videojs.Player;
   canvas: Canvas;

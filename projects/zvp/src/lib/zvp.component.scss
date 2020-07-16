@@ -32,7 +32,7 @@ Layouts
     justify-content: space-between;
 
     transition: opacity $transition;
-    opacity: 0;
+    opacity: 1;
 
     /*———————————————————————————————————————————————————————
     Show ui
@@ -135,7 +135,6 @@ Layouts
         justify-content: space-between;
 
         #left {
-          width: 100%;
           display: flex;
           flex-direction: row;
 
@@ -163,6 +162,16 @@ Layouts
               position: relative;
               width: #{$volume-bar-width}px;
               height: #{$bar-thickness}px;
+
+              #volume-pad {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                top: -9px;
+                left: 0;
+                width: 100%;
+                height: 18px;
+              }
 
               #volume-bar-total {
                 width: 100%;

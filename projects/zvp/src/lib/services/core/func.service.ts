@@ -34,8 +34,9 @@ export class FuncService {
     };
   }
 
-  setVolume($): void {
+  setVolume(): void {
     const player = this.db.renderer.player;
-    player.volume();
+    const volume = this.db.volume;
+    player.volume(volume);
   }
 }

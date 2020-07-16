@@ -36,7 +36,7 @@
             <fa-icon [icon]="faPlay" size="sm" class="icon-prefix" *ngIf="!togglePlayFlg"></fa-icon>
           </div>
           <div id="sound" class="flex-row-prefix">
-            <div id="volume" (click)="_toggleVolume()">
+            <div (click)="_toggleVolume()">
               <fa-icon
                 [icon]="faVolumeUp"
                 [fixedWidth]="true"
@@ -52,7 +52,8 @@
                 *ngIf="!toggleVolumeFlg"
               ></fa-icon>
             </div>
-            <div volumeBar id="volume-bar" zvpEvent (pointerData)="_onPointerEvents($event, 'volume')">
+            <div #volume id="volume-bar">
+              <div id="volume-pad" zvpEvent (pointerData)="_onPointerEvents($event, 'volume')"></div>
               <div id="volume-bar-total" class="bar-prefix"></div>
               <div
                 id="volume-bar-current"

@@ -3,12 +3,13 @@ import { DbService } from './db.service';
 import { Flgs } from '../../models/flgs.model';
 import { VideoService } from './video.service';
 import { PointerData } from '../../models/pointer-data.model';
+import { VolumeService } from './volume.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  constructor(private db: DbService, private video: VideoService) {}
+  constructor(private db: DbService, private video: VideoService, private volume: VolumeService) {}
 
   onMouseDown(): void {
     const reserved = this.db.reservedBy;
@@ -16,6 +17,7 @@ export class RegisterService {
     if (reserved.name === 'canvas') {
       this.video.registerOnMouseDown();
     } else if (reserved.name === 'volume') {
+      this.volume.registerOnLeftMove();
     }
   }
 
@@ -52,7 +54,8 @@ export class RegisterService {
     const flgs: Flgs = this.db.flgs;
 
     if (flgs.leftDownMoveFlg) {
-      if (reserved.name === '') {
+      if (reserved.name === 'volume') {
+        this.volume.registerOnLeftMove();
       }
     } else if (flgs.middleDownMoveFlg) {
       if (reserved.name === 'canvas') {

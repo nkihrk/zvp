@@ -1,4 +1,4 @@
-import { Injectable, ElementRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import videojs from 'video.js';
 import { VideoJsPlayerOptions } from 'video.js';
 import { RendererService } from './renderer.service';
@@ -57,17 +57,6 @@ export class ZvpService {
   // Private
   //
   //////////////////////////////////////////////////////////
-
-  _init($zvpWrapper: ElementRef<HTMLDivElement>, $renderer: ElementRef<HTMLCanvasElement>): void {
-    this.db.renderer.zvpWrapper = $zvpWrapper.nativeElement;
-    this.db.renderer.canvas.main = $renderer.nativeElement;
-    this.db.renderer.ctx.main = this.db.renderer.canvas.main.getContext('2d');
-
-    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
-    const h: number = this.db.renderer.zvpWrapper.getBoundingClientRect().height;
-    this.db.renderer.player.setAttribute('width', `${w}px`);
-    this.db.renderer.player.setAttribute('height', `${h}px`);
-  }
 
   _render(): void {
     this.renderer.render();

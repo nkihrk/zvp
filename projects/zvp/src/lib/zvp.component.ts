@@ -27,7 +27,7 @@ export class ZvpComponent implements OnInit {
   @ViewChild('zvpWrapper', { static: true }) zvpWrapper: ElementRef<HTMLDivElement>;
   @ViewChild('renderer', { static: true }) renderer: ElementRef<HTMLCanvasElement>;
 
-  @ViewChild('voluneBar', { static: true }) volumeBar: ElementRef<HTMLCanvasElement>;
+  @ViewChild('volume', { static: true }) volume: ElementRef<HTMLDivElement>;
 
   faPlay = faPlay;
   faVolumeUp = faVolumeUp;
@@ -65,16 +65,30 @@ export class ZvpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.zvp._init(this.zvpWrapper, this.renderer);
+    this._init();
 
     this._render();
   }
 
+  _init(): void {
+    this.db.renderer.zvpWrapper = this.zvpWrapper.nativeElement;
+    this.db.renderer.canvas.main = this.renderer.nativeElement;
+    this.db.renderer.ctx.main = this.db.renderer.canvas.main.getContext('2d');
+
+    const w: number = this.db.renderer.zvpWrapper.getBoundingClientRect().width;
+    const h: number = this.db.renderer.zvpWrapper.getBoundingClientRect().height;
+    this.db.renderer.player.setAttribute('width', `${w}px`);
+    this.db.renderer.player.setAttribute('height', `${h}px`);
+
+    this.db.renderer.volume = this.volume.nativeElement;
+  }
+
   _onPointerEvents($e: PointerData, $name: string): void {
-    const permit: boolean = !this.db.reservedBy.name || this.db.reservedBy.name === $name;
+    const permit: boolean = !this.db.reservedBy.name || this.db.reservedBy.name === $name || $e.wheelFlg;
 
     if (this.db.states.isInitialized && permit) {
-      this.db.reservedBy.name = $name;
+      if ($e.downFlg) this.db.reservedBy.name = $name;
+      if ($e.wheelFlg) this.db.reservedBy.name = 'canvas'; // For zooming
 
       this.flgEvent.updateFlgs($e);
       this.proc.update($e);

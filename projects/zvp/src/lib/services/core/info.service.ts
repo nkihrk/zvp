@@ -20,6 +20,7 @@ export class InfoService {
     const main: number = total * 0.98;
     const piece: number = total * 0.02;
     const current: number = this.db.mouseOffset.x - piece / 2;
+
     return (current / main) * 100 + '%';
   }
 
