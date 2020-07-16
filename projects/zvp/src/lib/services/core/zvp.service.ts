@@ -36,7 +36,9 @@ export class ZvpService {
     this.db.renderer.ctx.videoBuffer = this.db.renderer.canvas.videoBuffer.getContext('2d');
     this.db.renderer.ctx.uiBuffer = this.db.renderer.canvas.uiBuffer.getContext('2d');
 
+    // Set states
     this.db.states.isInitialized = true;
+    this.db.states.isPipAvailable = 'pictureInPictureEnabled' in document;
 
     //setInterval(() => {
     //console.log(this.db.videoOffset.zoomRatio);

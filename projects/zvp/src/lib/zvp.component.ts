@@ -35,6 +35,8 @@ export class ZvpComponent implements OnInit {
   faRedo = faRedo;
   faCompress = faCompress;
 
+  isPipAvailable = false;
+
   videoName = '';
   bufferedPercent = '0%';
   hoverPercent = '0%';
@@ -76,6 +78,7 @@ export class ZvpComponent implements OnInit {
         this.zvp._render();
 
         this._detectVideoStates();
+        this._detectBrowserStates();
         this._setInfo();
       }
 
@@ -114,6 +117,16 @@ export class ZvpComponent implements OnInit {
 
   //////////////////////////////////////////////////////////
   //
+  // Detect browser states
+  //
+  //////////////////////////////////////////////////////////
+
+  _detectBrowserStates(): void {
+    this.isPipAvailable = this.db.states.isPipAvailable;
+  }
+
+  //////////////////////////////////////////////////////////
+  //
   // Functions
   //
   //////////////////////////////////////////////////////////
@@ -135,14 +148,15 @@ export class ZvpComponent implements OnInit {
   }
 
   async _togglePip(): Promise<any> {
-    this.togglePipFlg = !this.togglePipFlg;
+    const d: any = document;
 
-    if (this.togglePipFlg) {
-      const video: any = this.db.renderer.video;
-      await video.requestPictureInPicture();
+    if (d.pictureInPictureElement) {
+      d.exitPictureInPicture().catch(($e) => {
+        // Error handling
+      });
     } else {
-      const d: any = document;
-      await d.exitPictureInPicture();
+      const video: any = this.db.renderer.video;
+      video.requestPictureInPicture();
     }
   }
 

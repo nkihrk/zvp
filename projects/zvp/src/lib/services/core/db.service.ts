@@ -42,7 +42,8 @@ export class DbService {
     isPreventWheel: false,
     isPreventWholeTrans: false,
     isLoaded: false,
-    isInitialized: false
+    isInitialized: false,
+    isPipAvailable: false
   };
 
   public mouseOffset = {
