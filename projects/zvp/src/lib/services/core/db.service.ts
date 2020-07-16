@@ -56,9 +56,9 @@ export class DbService {
     prevY: -Infinity
   };
 
-  public reservedByFunc = {
-    name: 'draw',
-    type: 'oekaki',
+  public reservedBy = {
+    name: '',
+    type: '',
     flgs: ['']
   };
 

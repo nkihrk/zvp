@@ -1,4 +1,4 @@
-<div #zvpWrapper id="zvp-wrapper" zvpEvent (pointerData)="_onPointerEvents($event)">
+<div #zvpWrapper id="zvp-wrapper">
   <canvas #renderer id="renderer" (click)="_togglePlay()"></canvas>
 
   <div id="overlay">
@@ -8,7 +8,13 @@
       </div>
     </div>
 
-    <div id="middle" (click)="_togglePlay()" (dblclick)="_toggleFullscreen()"></div>
+    <div
+      id="middle"
+      (click)="_togglePlay()"
+      (dblclick)="_toggleFullscreen()"
+      zvpEvent
+      (pointerData)="_onPointerEvents($event, 'canvas')"
+    ></div>
 
     <div id="bottom">
       <div id="test" class="flex-row-prefix">
@@ -46,7 +52,7 @@
                 *ngIf="!toggleVolumeFlg"
               ></fa-icon>
             </div>
-            <div id="volume-bar">
+            <div volumeBar id="volume-bar" zvpEvent (pointerData)="_onPointerEvents($event, 'volume')">
               <div id="volume-bar-total" class="bar-prefix"></div>
               <div
                 id="volume-bar-current"

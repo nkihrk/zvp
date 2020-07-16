@@ -11,16 +11,23 @@ export class RegisterService {
   constructor(private db: DbService, private video: VideoService) {}
 
   onMouseDown(): void {
-    this.video.registerOnMouseDown();
+    const reserved = this.db.reservedBy;
+
+    if (reserved.name === 'canvas') {
+      this.video.registerOnMouseDown();
+    } else if (reserved.name === 'volume') {
+    }
   }
 
   onNoMouseDown($event: PointerData): void {
+    const reserved = this.db.reservedBy;
     const flgs: Flgs = this.db.flgs;
 
-    this.video.registerOnMouseDown();
-
-    if (flgs.wheelFlg) {
-      this.video.registerOnNoMouseDown($event);
+    if (reserved.name === 'canvas') {
+      this.video.registerOnMouseDown();
+      if (flgs.wheelFlg) {
+        this.video.registerOnNoMouseDown($event);
+      }
     }
   }
 
@@ -31,17 +38,26 @@ export class RegisterService {
     } else if (flgs.rightUpFlg) {
     } else if (flgs.middleUpFlg) {
     }
+
+    // Release
+    this.db.reservedBy = {
+      name: '',
+      type: '',
+      flgs: ['']
+    };
   }
 
   onMouseMove($newOffsetX: number, $newOffsetY: number, $event: PointerData): void {
-    const reserved = this.db.reservedByFunc;
+    const reserved = this.db.reservedBy;
     const flgs: Flgs = this.db.flgs;
 
     if (flgs.leftDownMoveFlg) {
       if (reserved.name === '') {
       }
     } else if (flgs.middleDownMoveFlg) {
-      this.video.registerOnMouseMiddleMove($newOffsetX, $newOffsetY, $event);
+      if (reserved.name === 'canvas') {
+        this.video.registerOnMouseMiddleMove($newOffsetX, $newOffsetY, $event);
+      }
     }
   }
 }

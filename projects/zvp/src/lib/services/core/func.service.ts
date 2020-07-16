@@ -33,4 +33,9 @@ export class FuncService {
       newOffsetY: h / 2
     };
   }
+
+  setVolume($): void {
+    const player = this.db.renderer.player;
+    player.volume();
+  }
 }

@@ -27,6 +27,8 @@ export class ZvpComponent implements OnInit {
   @ViewChild('zvpWrapper', { static: true }) zvpWrapper: ElementRef<HTMLDivElement>;
   @ViewChild('renderer', { static: true }) renderer: ElementRef<HTMLCanvasElement>;
 
+  @ViewChild('voluneBar', { static: true }) volumeBar: ElementRef<HTMLCanvasElement>;
+
   faPlay = faPlay;
   faVolumeUp = faVolumeUp;
   faVolumeMute = faVolumeMute;
@@ -51,6 +53,8 @@ export class ZvpComponent implements OnInit {
   togglePipFlg = false;
   toggleFullscreenFlg = false;
 
+  volumeBarDownFlg = false;
+
   constructor(
     private db: DbService,
     private zvp: ZvpService,
@@ -66,8 +70,12 @@ export class ZvpComponent implements OnInit {
     this._render();
   }
 
-  _onPointerEvents($e: PointerData): void {
-    if (this.db.states.isInitialized) {
+  _onPointerEvents($e: PointerData, $name: string): void {
+    const permit: boolean = !this.db.reservedBy.name || this.db.reservedBy.name === $name;
+
+    if (this.db.states.isInitialized && permit) {
+      this.db.reservedBy.name = $name;
+
       this.flgEvent.updateFlgs($e);
       this.proc.update($e);
     }
@@ -129,7 +137,7 @@ export class ZvpComponent implements OnInit {
 
   //////////////////////////////////////////////////////////
   //
-  // Functions
+  // Functions - toggle
   //
   //////////////////////////////////////////////////////////
 
@@ -149,7 +157,7 @@ export class ZvpComponent implements OnInit {
     this.func.reset();
   }
 
-  async _togglePip(): Promise<any> {
+  _togglePip(): void {
     const d: any = document;
 
     if (d.pictureInPictureElement) {
