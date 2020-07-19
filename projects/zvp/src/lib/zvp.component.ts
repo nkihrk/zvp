@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, Input } from '@angular/core';
 import { DbService } from './services/core/db.service';
 import { ZvpService } from './services/core/zvp.service';
 import { PointerData } from './models/pointer-data.model';
@@ -6,6 +6,7 @@ import { FlgEventService } from './services/core/flg-event.service';
 import { ProcService } from './services/core/proc.service';
 import { InfoService } from './services/core/info.service';
 import { FuncService } from './services/core/func.service';
+import { VideoJsPlayerOptions } from 'video.js';
 // Fontawesome
 // - far
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -30,6 +31,8 @@ export class ZvpComponent implements OnInit {
 
   @ViewChild('playBar', { static: true }) playBar: ElementRef<HTMLDivElement>;
   @ViewChild('volumeBar', { static: true }) volumeBar: ElementRef<HTMLDivElement>;
+
+  @Input() options: VideoJsPlayerOptions = {};
 
   faPlay = faPlay;
   faVolumeUp = faVolumeUp;
@@ -70,6 +73,7 @@ export class ZvpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.zvp.init(this.options);
     this._init();
 
     this._render();

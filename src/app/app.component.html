@@ -1,3 +1,10 @@
 <div style="width: 1000px; height: 1000px; background-color: grey;">
-  <zvp-component></zvp-component>
+  <zvp-component
+    [options]="{
+      autoplay: false,
+      controls: false,
+      loop: false,
+      sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }]
+    }"
+  ></zvp-component>
 </div>

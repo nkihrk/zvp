@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import videojs, { VideoJsPlayer } from 'video.js';
-import { VideoJsPlayerOptions } from 'video.js';
+import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 import { RendererService } from './renderer.service';
 import { DbService } from './db.service';
 
@@ -14,6 +13,7 @@ export class ZvpService {
   // Public
   //
   //////////////////////////////////////////////////////////
+
   init($options: VideoJsPlayerOptions): void {
     this.db.renderer.video = document.createElement('video');
     this.db.renderer.video.onloadedmetadata = () => {
@@ -26,7 +26,7 @@ export class ZvpService {
       this.db.states.isLoaded = true;
     };
     this.db.renderer.player = videojs(this.db.renderer.video, $options, function onPlayerReady() {
-      console.log('onPlayerReady', this);
+      //console.log('onPlayerReady', this);
     });
 
     this.db.renderer.canvas.videoBuffer = document.createElement('canvas');
