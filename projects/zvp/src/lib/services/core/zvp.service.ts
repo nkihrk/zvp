@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import videojs from 'video.js';
+import videojs, { VideoJsPlayer } from 'video.js';
 import { VideoJsPlayerOptions } from 'video.js';
 import { RendererService } from './renderer.service';
 import { DbService } from './db.service';
@@ -46,10 +46,8 @@ export class ZvpService {
     //}, 1000);
   }
 
-  destroy(): void {
-    if (this.db.renderer.player) {
-      this.db.renderer.player.dispose();
-    }
+  get player(): VideoJsPlayer {
+    return this.db.renderer.player;
   }
 
   //////////////////////////////////////////////////////////
