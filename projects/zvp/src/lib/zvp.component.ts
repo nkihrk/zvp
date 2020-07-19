@@ -38,6 +38,7 @@ export class ZvpComponent implements OnInit {
   faRedo = faRedo;
   faCompress = faCompress;
 
+  isOverlayActive = false;
   isPipAvailable = false;
   isFullscreenAvailable = false;
 
@@ -147,6 +148,7 @@ export class ZvpComponent implements OnInit {
   //////////////////////////////////////////////////////////
 
   _detectBrowserStates(): void {
+    this.isOverlayActive = this.db.states.isOverlayActive;
     this.isPipAvailable = this.db.states.isPipAvailable;
     this.isFullscreenAvailable = this.db.states.isFullscreenAvailable;
   }

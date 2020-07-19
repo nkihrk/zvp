@@ -42,10 +42,15 @@ export class RegisterService {
   }
 
   onMouseUp(): void {
+    const reserved = this.db.reservedBy;
     const flgs: Flgs = this.db.flgs;
 
     if (flgs.leftUpFlg) {
-      this.playback.registerOnMouseUp();
+      if (reserved.name === 'play') {
+        this.playback.registerOnMouseUp();
+      } else if (reserved.name === 'volume') {
+        this.volume.registerOnMouseUp();
+      }
     } else if (flgs.rightUpFlg) {
     } else if (flgs.middleUpFlg) {
     }

@@ -1,7 +1,7 @@
 <div #zvpWrapper id="zvp-wrapper">
   <canvas #renderer id="renderer" (click)="_togglePlay()"></canvas>
 
-  <div id="overlay">
+  <div id="overlay" [class.active]="isOverlayActive">
     <div id="top">
       <div id="video-title">
         <h2 style="color: white;">{{ videoName }}</h2>

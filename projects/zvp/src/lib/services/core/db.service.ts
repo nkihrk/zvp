@@ -43,6 +43,7 @@ export class DbService {
     isPreventWholeTrans: false,
     isLoaded: false,
     isInitialized: false,
+    isOverlayActive: false,
     isPipAvailable: false,
     isFullscreenAvailable: false
   };

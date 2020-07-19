@@ -12,11 +12,20 @@ export class VolumeService {
     if (!this._isMuted()) {
       const minX: number = this.db.renderer.volumeBar.getBoundingClientRect().left;
       const w: number = this.db.renderer.volumeBar.getBoundingClientRect().width;
-      this.db.volumeWidth = (this.db.mouseOffset.x - minX) / w;
 
+      this.db.volumeWidth = (this.db.mouseOffset.x - minX) / w;
       this._restrictRange();
+
+      // Set ovelay UI visible
+      this.db.states.isOverlayActive = true;
+
       this.func.setVolume();
     }
+  }
+
+  registerOnMouseUp(): void {
+    // Set ovelay UI invisible
+    this.db.states.isOverlayActive = false;
   }
 
   _isMuted(): boolean {

@@ -6,6 +6,8 @@ import { FuncService } from './func.service';
   providedIn: 'root'
 })
 export class PlaybackService {
+  private isAlreadyPaused = false;
+
   constructor(private db: DbService, private func: FuncService) {}
 
   registerOnLeftMove(): void {
@@ -15,12 +17,22 @@ export class PlaybackService {
     this.db.playWidth = ((this.db.mouseOffset.x - minX) / w) * this.db.renderer.player.duration();
     this._restrictRange();
 
-    this._stopPlay();
+    // Set ovelay UI visible
+    this.db.states.isOverlayActive = true;
+
+    if (this.db.renderer.player.paused()) {
+      this.isAlreadyPaused = true;
+    } else {
+      this._stopPlay();
+    }
     this.func.setPlayTime();
   }
 
   registerOnMouseUp(): void {
-    this._resumePlay();
+    if (!this.isAlreadyPaused) this._resumePlay();
+
+    // Set ovelay UI invisible
+    this.db.states.isOverlayActive = false;
   }
 
   _restrictRange(): void {
