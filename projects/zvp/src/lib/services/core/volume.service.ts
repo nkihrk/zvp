@@ -10,9 +10,9 @@ export class VolumeService {
 
   registerOnLeftMove(): void {
     if (!this._isMuted()) {
-      const minX: number = this.db.renderer.volume.getBoundingClientRect().left;
-      const w: number = this.db.renderer.volume.getBoundingClientRect().width;
-      this.db.volume = (this.db.mouseOffset.x - minX) / w;
+      const minX: number = this.db.renderer.volumeBar.getBoundingClientRect().left;
+      const w: number = this.db.renderer.volumeBar.getBoundingClientRect().width;
+      this.db.volumeWidth = (this.db.mouseOffset.x - minX) / w;
 
       this._restrictRange();
       this.func.setVolume();
@@ -27,7 +27,7 @@ export class VolumeService {
   }
 
   _restrictRange(): void {
-    if (this.db.volume < 0) this.db.volume = 0;
-    if (this.db.volume > 1) this.db.volume = 1;
+    if (this.db.volumeWidth < 0) this.db.volumeWidth = 0;
+    if (this.db.volumeWidth > 1) this.db.volumeWidth = 1;
   }
 }

@@ -27,7 +27,8 @@ export class ZvpComponent implements OnInit {
   @ViewChild('zvpWrapper', { static: true }) zvpWrapper: ElementRef<HTMLDivElement>;
   @ViewChild('renderer', { static: true }) renderer: ElementRef<HTMLCanvasElement>;
 
-  @ViewChild('volume', { static: true }) volume: ElementRef<HTMLDivElement>;
+  @ViewChild('playBar', { static: true }) playBar: ElementRef<HTMLDivElement>;
+  @ViewChild('volumeBar', { static: true }) volumeBar: ElementRef<HTMLDivElement>;
 
   faPlay = faPlay;
   faVolumeUp = faVolumeUp;
@@ -80,7 +81,8 @@ export class ZvpComponent implements OnInit {
     this.db.renderer.player.setAttribute('width', `${w}px`);
     this.db.renderer.player.setAttribute('height', `${h}px`);
 
-    this.db.renderer.volume = this.volume.nativeElement;
+    this.db.renderer.playBar = this.playBar.nativeElement;
+    this.db.renderer.volumeBar = this.volumeBar.nativeElement;
   }
 
   _onPointerEvents($e: PointerData, $name: string): void {

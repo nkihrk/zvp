@@ -34,9 +34,15 @@ export class FuncService {
     };
   }
 
+  setPlayTime(): void {
+    const player = this.db.renderer.player;
+    const playWidth: number = this.db.playWidth;
+    player.currentTime(playWidth);
+  }
+
   setVolume(): void {
     const player = this.db.renderer.player;
-    const volume = this.db.volume;
-    player.volume(volume);
+    const volumeWidth = this.db.volumeWidth;
+    player.volume(volumeWidth);
   }
 }

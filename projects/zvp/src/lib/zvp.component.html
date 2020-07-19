@@ -17,8 +17,8 @@
     ></div>
 
     <div id="bottom">
-      <div id="test" class="flex-row-prefix">
-        <div id="play-bar">
+      <div class="flex-row-prefix">
+        <div #playBar id="play-bar" zvpEvent (pointerData)="_onPointerEvents($event, 'play')">
           <div id="play-bar-total" class="bar-prefix"></div>
           <div id="play-bar-cached" class="bar-prefix" [style.width]="bufferedPercent"></div>
           <div id="play-bar-hover" class="bar-prefix" [style.width]="hoverPercent"></div>
@@ -52,7 +52,7 @@
                 *ngIf="!toggleVolumeFlg"
               ></fa-icon>
             </div>
-            <div #volume id="volume-bar">
+            <div #volumeBar id="volume-bar">
               <div id="volume-pad" zvpEvent (pointerData)="_onPointerEvents($event, 'volume')"></div>
               <div id="volume-bar-total" class="bar-prefix"></div>
               <div
