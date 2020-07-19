@@ -14,7 +14,6 @@ export class ZvpService {
   // Public
   //
   //////////////////////////////////////////////////////////
-
   init($options: VideoJsPlayerOptions): void {
     this.db.renderer.video = document.createElement('video');
     this.db.renderer.video.onloadedmetadata = () => {
