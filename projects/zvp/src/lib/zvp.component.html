@@ -42,7 +42,14 @@
                 [fixedWidth]="true"
                 size="sm"
                 class="icon-prefix"
-                *ngIf="toggleVolumeFlg"
+                *ngIf="toggleVolumeFlg && toggleVolumeSizeFlg"
+              ></fa-icon>
+              <fa-icon
+                [icon]="faVolumeDown"
+                [fixedWidth]="true"
+                size="sm"
+                class="icon-prefix"
+                *ngIf="toggleVolumeFlg && !toggleVolumeSizeFlg"
               ></fa-icon>
               <fa-icon
                 [icon]="faVolumeMute"

@@ -10,6 +10,7 @@ import { FuncService } from './services/core/func.service';
 // - far
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeDown } from '@fortawesome/free-solid-svg-icons';
 import { faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
@@ -32,6 +33,7 @@ export class ZvpComponent implements OnInit {
 
   faPlay = faPlay;
   faVolumeUp = faVolumeUp;
+  faVolumeDown = faVolumeDown;
   faVolumeMute = faVolumeMute;
   faExpand = faExpand;
   faWindowRestore = faWindowRestore;
@@ -52,6 +54,7 @@ export class ZvpComponent implements OnInit {
 
   togglePlayFlg = false;
   toggleVolumeFlg = true;
+  toggleVolumeSizeFlg = true;
   togglePipFlg = false;
   toggleFullscreenFlg = false;
 
@@ -138,6 +141,7 @@ export class ZvpComponent implements OnInit {
   _detectVideoStates(): void {
     this.togglePlayFlg = !this.db.renderer.player.paused();
     this.toggleVolumeFlg = !this.db.renderer.player.muted();
+    this.toggleVolumeSizeFlg = this.db.renderer.player.volume() > 0.4;
     this.toggleFullscreenFlg = !document.fullscreenElement;
   }
 
