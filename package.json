@@ -5,7 +5,7 @@
     "ng": "ng",
     "start_lib": "ng build --project zvp --watch",
     "start_server": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href ./",
     "deploy": "gh-pages -d dist/app",
     "test": "ng test",
     "lint": "ng lint",
