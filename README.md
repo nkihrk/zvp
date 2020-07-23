@@ -1,8 +1,14 @@
-# ZVP - Zoomable Video Player
+# <p align="middle">ZVP - Zoomable Video Player</p>
 
-ZVP offers zoomable video player with YouTube-like UI. Supporting Picture-In-Picture mode.
+<p align="middle">ZVP offers zoomable video player with YouTube-like UI. Supporting Picture-In-Picture mode.</p>
 
-### Installation
+<br>
+
+![ZVP_preview](./src/assets/screenshot_17-58-31.png)
+
+<br>
+
+# Installation
 
 ```
 npm install zvp
@@ -20,7 +26,9 @@ import { ZvpModule } from 'zvp';
 })
 ```
 
-### Usage
+<br>
+
+# Usage
 
 Add this code to a view-template.
 <br>
@@ -38,7 +46,9 @@ Add this code to a view-template.
 
 ZVP is the wrapper player of <a href="https://github.com/videojs">Video.js</a>. To see more clearly about `options` above, go visit <a href="https://docs.videojs.com/tutorial-options.html">this page</a>.
 
-### License
+<br>
+
+# License
 
 MIT Licence
 
