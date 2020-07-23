@@ -18,7 +18,7 @@ ZVP is a zoomable video player with YouTube-like UI for your Angular application
 npm install zvp
 ```
 
-And import into your NgModule
+And import into your NgModule.
 
 ```
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,16 +36,18 @@ import { ZvpModule } from 'zvp';
 
 Add this code to a view-template.
 <br>
-( ZVP currently allow only one player per view-template. We will figure it out sooner or later. )
+( ZVP currently allows only one player per a view-template. Will figure it out sooner or later. )
 
 ```
-<zvp-component
-  [options]="{
-    sources: [
-      { src: '$url', type: '$videoType' }
-    ]
-  }"
-></zvp-component>
+<div style="width: 1000px; height: 100%">
+  <zvp-component
+    [options]="{
+      sources: [
+        { src: '$url', type: '$videoType' }
+      ]
+    }"
+  ></zvp-component>
+</div>
 ```
 
 ZVP is the wrapper player of <a href="https://github.com/videojs" target="_blank">Video.js</a>. To see more clearly about `options` above, go visit <a href="https://docs.videojs.com/tutorial-options.html" target="_blank">this page</a>.
