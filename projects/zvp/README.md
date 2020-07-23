@@ -8,7 +8,7 @@ ZVP is a zoomable video player with YouTube-like UI for your Angular application
 
 <br>
 
-![ZVP_preview](./src/assets/screenshot_17-58-31.png)
+![ZVP_preview](../../src/assets/screenshot_17-58-31.png)
 
 <br>
 
