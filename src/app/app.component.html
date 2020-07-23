@@ -1,12 +1,13 @@
-<div>ZVP</div>
-
-<div style="width: 1000px;">
+<div style="width: 1000px; height: 100%; margin: 0 auto;">
+  <a href="https://github.com/nkihrk/zvp" target="_blank"><h1 style="padding: 10px 0 20px 0;">ZVP</h1></a>
   <zvp-component
     [options]="{
       autoplay: false,
       controls: false,
       loop: false,
-      sources: [{ src: 'assets/pv3.mp4', type: 'video/mp4' }]
+      sources: [
+        { src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', type: 'video/mp4' }
+      ]
     }"
   ></zvp-component>
 </div>

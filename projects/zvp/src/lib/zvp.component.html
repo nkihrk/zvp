@@ -3,7 +3,7 @@
 
   <div id="overlay" [class.active]="isOverlayActive">
     <div id="top">
-      <div id="video-title">
+      <div id="video-title" class="no-select">
         <h2 style="color: white;">{{ videoName }}</h2>
       </div>
     </div>
@@ -71,7 +71,7 @@
               <div id="volume-bar-current-muted" class="bar-prefix" *ngIf="!toggleVolumeFlg"></div>
             </div>
           </div>
-          <div id="playback-time">{{ currentPlaybackTime }} / {{ totalPlaybackTime }}</div>
+          <div id="playback-time" class="no-select">{{ currentPlaybackTime }} / {{ totalPlaybackTime }}</div>
         </div>
 
         <div id="right" class="flex-row-prefix">

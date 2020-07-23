@@ -103,7 +103,7 @@ export class EventDirective {
 
   // Wheel listener
   @HostListener('wheel', ['$event']) onMouseWheel($e) {
-    //$e.stopPropagation();
+    $e.preventDefault();
 
     const clientX = $e.clientX;
     const clientY = $e.clientY;
