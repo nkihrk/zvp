@@ -13,7 +13,8 @@ export class VolumeService {
       const minX: number = this.db.renderer.volumeBar.getBoundingClientRect().left;
       const w: number = this.db.renderer.volumeBar.getBoundingClientRect().width;
 
-      this.db.volumeWidth = (this.db.mouseOffset.x - minX) / w;
+      this.db.volumeWidth = (this.db.mouseOffset.rawX - minX) / w;
+
       this._restrictRange();
 
       // Set ovelay UI visible

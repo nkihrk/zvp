@@ -14,7 +14,7 @@ export class PlaybackService {
     const minX: number = this.db.renderer.playBar.getBoundingClientRect().left;
     const w: number = this.db.renderer.playBar.getBoundingClientRect().width;
 
-    this.db.playWidth = ((this.db.mouseOffset.x - minX) / w) * this.db.renderer.player.duration();
+    this.db.playWidth = ((this.db.mouseOffset.rawX - minX) / w) * this.db.renderer.player.duration();
     this._restrictRange();
 
     // Set ovelay UI visible
