@@ -1,6 +1,6 @@
 # <p align="middle">ZVP</p>
 
-<p align="middle">zvp offers zoomable video player with youtube-like UI
+<p align="middle">ZVP offers zoomable video player with YouTube-like UI
 <br><a href="https://nkihrk.github.io/zvp/"><b>DEMO</b></a>
 </p>
 <br>
