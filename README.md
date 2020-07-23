@@ -48,7 +48,7 @@ Add this code to a view-template.
 ></zvp-component>
 ```
 
-ZVP is the wrapper player of <a href="https://github.com/videojs">Video.js</a>. To see more clearly about `options` above, go visit <a href="https://docs.videojs.com/tutorial-options.html">this page</a>.()
+ZVP is the wrapper player of <a href="https://github.com/videojs">Video.js</a>. To see more clearly about `options` above, go visit <a href="https://docs.videojs.com/tutorial-options.html">this page</a>.
 
 <br>
 
