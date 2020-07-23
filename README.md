@@ -1,6 +1,10 @@
-# <p align="middle">ZVP - Zoomable Video Player</p>
+# <p align="middle">ZVP - Zoomable Video Player ( Angular 10+ )</p>
 
-<p align="middle">ZVP offers zoomable video player with YouTube-like UI. Supporting Picture-In-Picture mode.</p>
+<p align="middle">
+ZVP is a zoomable video player with YouTube-like UI for your Angular applications.
+<br>
+<a href="https://nkihrk.github.io/zvp/"><b>DEMO</b></a>
+</p>
 
 <br>
 
@@ -44,7 +48,7 @@ Add this code to a view-template.
 ></zvp-component>
 ```
 
-ZVP is the wrapper player of <a href="https://github.com/videojs">Video.js</a>. To see more clearly about `options` above, go visit <a href="https://docs.videojs.com/tutorial-options.html">this page</a>.
+ZVP is the wrapper player of <a href="https://github.com/videojs">Video.js</a>. To see more clearly about `options` above, go visit <a href="https://docs.videojs.com/tutorial-options.html">this page</a>.()
 
 <br>
 
